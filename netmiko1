@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+from getpass import getpass
+from netmiko import ConnectHandler
+
+user = input("Enter a remote username: ")
+passw = getpass()
+
+with open('collection_of_commands') as file:
+    commands = file.read().splitlines()
+
+with open('ip_addresses_of_the_devices') as file:
+    devices = file.read().splitlines()
+
+for dev in devices:
+    print("Connecting to " + dev)
+    ip_addr = dev
+    cisco_dev = {
+        'device_type': 'cisco_ios',
+        'ip': ip_addr,
+        'username': user.encode('ascii'),
+        'password': passw
+    }
+
+    session = ConnectHandler(**cisco_dev)
+    out = session.send_config_set(commands)
+    print(out)
