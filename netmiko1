@@ -12,6 +12,8 @@ with open('collection_of_commands') as file:
 with open('ip_addresses_of_the_devices') as file:
     devices = file.read().splitlines()
 
+start_time = datetime.now() 
+
 for dev in devices:
     print("Connecting to " + dev)
     ip_addr = dev
@@ -21,7 +23,11 @@ for dev in devices:
         'username': user.encode('ascii'),
         'password': passw
     }
-
+    
     session = ConnectHandler(**cisco_dev)
     out = session.send_config_set(commands)
     print(out)
+      
+end_time = datetime.now() 
+total_time = end_time - start_time
+print(total_time)
