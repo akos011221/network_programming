@@ -3,19 +3,19 @@
 from getpass import getpass
 from netmiko import ConnectHandler
 
-user = input("Enter a remote username: ")
+user = input("TACACS username: ")
 passw = getpass()
 
-with open('collection_of_commands') as file:
+with open('commands_file') as file:
     commands = file.read().splitlines()
 
-with open('ip_addresses_of_the_devices') as file:
+with open('ipaddresses_file') as file:
     devices = file.read().splitlines()
 
 start_time = datetime.now() 
 
-for dev in devices:
-    print("Connecting to " + dev)
+for device in devices:
+    print("Connecting to " + device)
     ip_addr = dev
     cisco_dev = {
         'device_type': 'cisco_ios',
