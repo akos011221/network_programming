@@ -10,7 +10,7 @@ for i in range(1, n):
     cmargs.append(sys.argv[i])
 
 # auth
-username = 'te445587teadm'
+username = input('User: ')
 password = getpass()
 
 
