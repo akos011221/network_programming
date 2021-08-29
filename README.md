@@ -3,7 +3,7 @@
 ./bgpcheck.py <ip-address/hostname> bgp
 
 Examples: 
-./bgpcheck.py 69.69.69.69 bgp
-./bgpcheck.py cisco-rtr-001 bgp
+python bgpcheck.py 69.69.69.69 bgp
+python bgpcheck.py cisco-rtr-001 bgp
 
 The arg is needed.
