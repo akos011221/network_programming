@@ -45,7 +45,7 @@ if 'bgp' or 'BGP' in cmargs:
                 out = session.send_command_timing(
                     'show bgp ipv4 unicast neighbors ' + pieces[0] + ' | include Description')
                 check = out.split(
-                    ' ')  # checking if there's a Description for the neighbor. If not, then the length of this list is 1
+                    ' ')  # checking if there's a description for the peer
                 if len(check) > 1:  # if the length is larger than 1, there's a Description
                     # print with description
                     print('BGP Peer ' + pieces[0] + ' "' + out.replace(' Description: ', '') + '" has been down for ' +
