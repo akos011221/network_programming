@@ -68,4 +68,5 @@ if 'bgp' or 'BGP' in cmargs:
                 else:
                     # print w/o description
                     print('BGP Peer ' + pieces[0] + ' is manually shut down [Idle (Admin)] on ' + device)
+                    
         out = ''
