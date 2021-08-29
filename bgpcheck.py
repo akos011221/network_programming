@@ -11,7 +11,7 @@ for i in range(1, n):
 
 # device parameters, connecting
 device_type = 'cisco_ios'
-username = input('Username: ')
+username = 'te445587teadm'
 password = getpass()
 verbose = True
 device = cmargs[0]
@@ -34,12 +34,9 @@ if 'bgp' in cmargs:
     # if active..
     else:
         # adding each line of the show command output to a list
-        lines = []
         out = session.send_command_timing('show bgp ipv4 unicast summary | begin Nei')
-        lines = out.splitlines()
-        del lines[0]  # deleting the header
 
-        for i in lines:  # looping through the lines
+        for i in out.splitlines()[1:]:  # looping through the lines, ignoring the header
 
             pieces = i.split()
             # if peer is Active or Idle and not in Idle (Admin)
