@@ -22,7 +22,7 @@ out = session.send_command_timing('enable')
 
 
 # bgp summary-check
-if 'bgp' in cmargs:
+if 'bgp' or 'BGP' in cmargs:
     print('Checking BGP...')
 
     # checking whether BGP is active on the device..
