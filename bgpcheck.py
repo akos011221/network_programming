@@ -47,7 +47,7 @@ if 'bgp' or 'BGP' in cmargs:
                 check = out.split(
                     ' ')  # checking if there's a Description for the neighbor. If not, then the length of this list is 1
                 if len(check) > 1:  # if the length is larger than 1, there's a Description
-                    # print via description
+                    # print with description
                     print('BGP Peer ' + pieces[0] + ' "' + out.replace(' Description: ', '') + '" has been down for ' +
                           pieces[8] + ' on ' + device)
                 else:
@@ -61,7 +61,7 @@ if 'bgp' or 'BGP' in cmargs:
                 check = out.split(' ')  # same description check as above..
 
                 if len(check) > 1:
-                    # print via description
+                    # print with description
                     print('BGP Peer ' + pieces[0] + ' "' + out.replace('Description: ',
                                                                        '') + '" is manually shut down [Idle (Admin)] on ' + device)
                 else:
