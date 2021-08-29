@@ -10,7 +10,7 @@ for i in range(1, n):
     cmargs.append(sys.argv[i])
 
 # auth
-username = input('User: ')
+username = 'te445587teadm'
 password = getpass()
 
 
@@ -18,7 +18,7 @@ for dev in cmargs:
 
     device_type = 'cisco_ios'
     verbose = True
-    print('Connecting to ' + dev)
+    print('Connecting to ' + dev + "\n" + '=' * 20)
     cisco_dev = {'device_type': 'cisco_ios', 'ip': dev, 'username': username, 'password': password}
     session = ConnectHandler(**cisco_dev)
     out = session.send_command_timing('enable')
@@ -56,15 +56,15 @@ for dev in cmargs:
                 if len(pieces) <= 10:
 
                     print('[-] BGP Peer ' + pieces[0] + ' is DOWN for ' +
-                          pieces[8] + ' on ' + dev + ' # ' + desc_str)
+                          pieces[8] + ' # ' + desc_str)
 
                 else:
                     print('[A] BGP Peer ' + pieces[
-                        0] + ' is manually SHUT DOWN [Idle (Admin)] on ' + dev + ' # ' + desc_str)
+                        0] + ' is manually SHUT DOWN' + ' # ' + desc_str)
 
             # if connection is up
             else:
-                print('[+] BGP Peer ' + pieces[0] + ' is UP for ' + pieces[8] + ' on ' + dev + ' # ' + desc_str)
+                print('[+] BGP Peer ' + pieces[0] + ' is UP for ' + pieces[8] + ' # ' + desc_str)
 
         out = ''
 
