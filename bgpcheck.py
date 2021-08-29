@@ -1,6 +1,7 @@
-from getpass import getpass
-from netmiko import ConnectHandler
 import sys
+from getpass import getpass
+
+from netmiko import ConnectHandler
 
 # adding command line args to a list
 cmargs = []
@@ -54,7 +55,7 @@ if 'bgp' or 'BGP' in cmargs:
             if pieces[9] == 'Active' or pieces[9] == 'Idle':
                 if len(pieces) <= 10:
 
-                    print('[-] BGP Peer ' + pieces[0] + ' has been DOWN for ' +
+                    print('[-] BGP Peer ' + pieces[0] + ' is DOWN for ' +
                           pieces[8] + ' on ' + device + ' # ' + desc_str)
 
                 else:
@@ -63,7 +64,7 @@ if 'bgp' or 'BGP' in cmargs:
 
             # if connection is up
             else:
-                print('[+] BGP Peer ' + pieces[0] + ' is is UP for ' + pieces[8] + ' on ' + device + ' # ' + desc_str)
+                print('[+] BGP Peer ' + pieces[0] + ' is UP for ' + pieces[8] + ' on ' + device + ' # ' + desc_str)
 
         out = ''
 
