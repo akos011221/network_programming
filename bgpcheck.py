@@ -9,26 +9,25 @@ n = len(sys.argv)
 for i in range(1, n):
     cmargs.append(sys.argv[i])
 
-# device parameters, connecting
-device_type = 'cisco_ios'
-username = input('Username: ')
+# auth
+username = input('User: ')
 password = getpass()
-verbose = True
-device = cmargs[0]
-print('-' * 20 + '\nConnecting to ' + device + '\n' + '-' * 20)
-cisco_dev = {'device_type': 'cisco_ios', 'ip': device, 'username': username, 'password': password}
-session = ConnectHandler(**cisco_dev)
-out = session.send_command_timing('enable')
 
-# bgp summary-check
-if 'bgp' or 'BGP' in cmargs:
-    print('-=Checking BGP=-')
+
+for dev in cmargs:
+
+    device_type = 'cisco_ios'
+    verbose = True
+    print('Connecting to ' + dev)
+    cisco_dev = {'device_type': 'cisco_ios', 'ip': dev, 'username': username, 'password': password}
+    session = ConnectHandler(**cisco_dev)
+    out = session.send_command_timing('enable')
 
     # checking whether BGP is active on the device..
     out = session.send_command('show bgp ipv4 unicast summary')
     # if not active..
     if '% BGP not active' in out:
-        print('BGP is not configured on ' + device)
+        print('[!] BGP is not configured on ' + dev)
 
     # if active..
     else:
@@ -38,7 +37,6 @@ if 'bgp' or 'BGP' in cmargs:
         for i in out.splitlines()[1:]:  # looping through the lines, ignoring the header
 
             pieces = i.split()
-
 
             out = session.send_command_timing(
                 'show bgp ipv4 unicast neighbors ' + pieces[0] + ' | include Description')
@@ -58,17 +56,24 @@ if 'bgp' or 'BGP' in cmargs:
                 if len(pieces) <= 10:
 
                     print('[-] BGP Peer ' + pieces[0] + ' is DOWN for ' +
-                          pieces[8] + ' on ' + device + ' # ' + desc_str)
+                          pieces[8] + ' on ' + dev + ' # ' + desc_str)
 
                 else:
-                    print('[-] BGP Peer ' + pieces[
-                        0] + ' is manually SHUT DOWN [Idle (Admin)] on ' + device + ' # ' + desc_str)
+                    print('[A] BGP Peer ' + pieces[
+                        0] + ' is manually SHUT DOWN [Idle (Admin)] on ' + dev + ' # ' + desc_str)
 
             # if connection is up
             else:
-                print('[+] BGP Peer ' + pieces[0] + ' is UP for ' + pieces[8] + ' on ' + device + ' # ' + desc_str)
+                print('[+] BGP Peer ' + pieces[0] + ' is UP for ' + pieces[8] + ' on ' + dev + ' # ' + desc_str)
 
         out = ''
 
-out = session.send_command_timing('show clock')
-print('-' * 20 + '\nSystem clock: ' + out)
+    out = session.send_command_timing('show clock')
+    print('=' * 20 + '\nSystem clock: ' + out)
+    print("\n")
+
+
+
+
+
+
