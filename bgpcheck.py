@@ -11,7 +11,7 @@ for i in range(1, n):
 
 # device parameters, connecting
 device_type = 'cisco_ios'
-username = input('User: ')
+username = input('Username: ')
 password = getpass()
 verbose = True
 device = cmargs[0]
@@ -38,8 +38,7 @@ if 'bgp' or 'BGP' in cmargs:
         for i in out.splitlines()[1:]:  # looping through the lines, ignoring the header
 
             pieces = i.split()
-            # if peer is Active or Idle and not in Idle (Admin)
-            # if pieces' length is larger than 9, then there's an '(Admin)' word after Idle
+
 
             out = session.send_command_timing(
                 'show bgp ipv4 unicast neighbors ' + pieces[0] + ' | include Description')
@@ -53,6 +52,9 @@ if 'bgp' or 'BGP' in cmargs:
 
             # if connection is down
             if pieces[9] == 'Active' or pieces[9] == 'Idle':
+
+                # if peer is Active or Idle and not in Idle (Admin)
+                # if pieces' length is larger than 9, then there's an '(Admin)' word after Idle
                 if len(pieces) <= 10:
 
                     print('[-] BGP Peer ' + pieces[0] + ' is DOWN for ' +
