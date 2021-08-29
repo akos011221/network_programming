@@ -46,7 +46,7 @@ if 'bgp' or 'BGP' in cmargs:
             desc_str = ''
 
             if len(check) > 1:
-                desc_str = out
+                desc_str = out.strip()
             else:
                 desc_str = 'Description: N/A'
 
@@ -54,16 +54,16 @@ if 'bgp' or 'BGP' in cmargs:
             if pieces[9] == 'Active' or pieces[9] == 'Idle':
                 if len(pieces) <= 10:
 
-                    print('BGP Peer ' + pieces[0] + ' has been DOWN for ' +
+                    print('[-] BGP Peer ' + pieces[0] + ' has been DOWN for ' +
                           pieces[8] + ' on ' + device + ' # ' + desc_str)
 
                 else:
-                    print('BGP Peer ' + pieces[
+                    print('[-] BGP Peer ' + pieces[
                         0] + ' is manually SHUT DOWN [Idle (Admin)] on ' + device + ' # ' + desc_str)
 
             # if connection is up
             else:
-                print('BGP Peer ' + pieces[0] + ' is is UP for ' + pieces[8] + ' on ' + device + ' # ' + desc_str)
+                print('[+] BGP Peer ' + pieces[0] + ' is is UP for ' + pieces[8] + ' on ' + device + ' # ' + desc_str)
 
         out = ''
 
