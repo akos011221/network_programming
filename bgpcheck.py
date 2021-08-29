@@ -41,12 +41,14 @@ if 'bgp' or 'BGP' in cmargs:
             pieces = i.split()
             # if peer is Active or Idle and not in Idle (Admin)
             # if pieces' length is larger than 9, then there's an '(Admin)' word after Idle
-            if pieces[9] == 'Idle' or 'Active' and len(pieces) <= 9:
+            print(len(pieces))
+            print(pieces)
+            if pieces[9] == 'Idle' or 'Active' and len(pieces) <= 10:
                 out = session.send_command_timing(
                     'show bgp ipv4 unicast neighbors ' + pieces[0] + ' | include Description')
                 check = out.split(
                     ' ')  # checking if there's a description for the peer
-                if len(check) > 1:  # if the length is larger than 1, there's a Description
+                if len(check) > 1:
                     # print with description
                     print('BGP Peer ' + pieces[0] + ' "' + out.replace(' Description: ', '') + '" has been down for ' +
                           pieces[8] + ' on ' + device)
@@ -67,12 +69,4 @@ if 'bgp' or 'BGP' in cmargs:
                 else:
                     # print w/o description
                     print('BGP Peer ' + pieces[0] + ' is manually shut down [Idle (Admin)] on ' + device)
-
-
-
-
-
-
-
-
-
+        out = ''
