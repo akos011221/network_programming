@@ -11,7 +11,7 @@ for i in range(1, n):
 
 # device parameters, connecting
 device_type = 'cisco_ios'
-username = 'te445587teadm'
+username = input('User: ')
 password = getpass()
 verbose = True
 device = cmargs[0]
