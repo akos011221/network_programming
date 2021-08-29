@@ -41,8 +41,7 @@ if 'bgp' or 'BGP' in cmargs:
             pieces = i.split()
             # if peer is Active or Idle and not in Idle (Admin)
             # if pieces' length is larger than 9, then there's an '(Admin)' word after Idle
-            print(len(pieces))
-            print(pieces)
+    
             if pieces[9] == 'Idle' or 'Active' and len(pieces) <= 10:
                 out = session.send_command_timing(
                     'show bgp ipv4 unicast neighbors ' + pieces[0] + ' | include Description')
