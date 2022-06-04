@@ -17,7 +17,7 @@ devices = {
 
 try:
     net_connect = ConnectHandler(**devices)
-    output = net_connect.send_command(f"show arp dynamic all")
+    output = net_connect.send_command("show arp dynamic all")
     allines = output.split("\n")
 
     for entry in allines:
