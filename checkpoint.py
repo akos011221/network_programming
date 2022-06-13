@@ -1,3 +1,6 @@
+### finds the ARP entry of a given IP address on the specified Checkpoint firewall.
+### no expert mode access is needed
+
 import re
 
 from netmiko import ConnectHandler
