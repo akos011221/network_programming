@@ -1,6 +1,6 @@
 
 ### usage: python bgp.py <router ip/hostname> 
-### print the BGP connections on the router(s) with the peer IP, status, uptime/downtime, peer description
+### prints the BGP connections on the router(s) with the peer IP, status, uptime/downtime, peer description
 
 import sys
 from getpass import getpass
