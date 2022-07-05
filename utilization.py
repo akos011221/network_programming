@@ -101,7 +101,7 @@ with ConnectHandler(ip=ipaddr,
             destip = re.findall(r"Echos to.*,", command)
             destip = " ".join(destip)
             destip = destip.replace("Echos to ", "").replace(",", "")
-            successrate = re.findall(r"[0-100]* percent", command)
+            successrate = re.findall(r"\d* percent", command)
             successrate = " ".join(successrate)
             successrate = successrate.replace(" percent", "")
             packetloss = 100 - int(successrate)
@@ -118,8 +118,8 @@ with ConnectHandler(ip=ipaddr,
     
             destip = nhsip
             
-            command = ch.send_command(f'ping {nhsip} siz 1400 rep 420')
-            successrate = re.findall(r"[0-100]* percent", command)
+            command = ch.send_command(f'ping {nhsip} siz 1400 rep 250')
+            successrate = re.findall(r"\d* percent", command)
             successrate = " ".join(successrate)
             successrate = successrate.replace(" percent", "")
             packetloss = 100 - int(successrate)
